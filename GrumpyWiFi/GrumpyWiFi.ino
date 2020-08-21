@@ -29,7 +29,7 @@
  * https://thingpulse.com
  * 
  * 
- * ESP-01 Wifi Network Scanner v1.0
+ * ESP-01 Wifi Network Scanner v1.0.1
  * 
  * Copyright (c) 2020 by UncleGrumpy (Winford)
  * 
@@ -98,7 +98,7 @@ void loop() {
     display.setTextAlignment(TEXT_ALIGN_CENTER);
     display.setFont(ArialMT_Plain_24);
     display.drawString(64, 32, "No networks!");
-    display.setFont(ArialMT_Plain_16);
+    display.setFont(ArialMT_Plain_10);
   } else {
     display.setTextAlignment(TEXT_ALIGN_LEFT);
     String netNum = String(String((n)) + " Networks Discovered:");
@@ -107,9 +107,10 @@ void loop() {
     for (int i = 0; i < n; ++i) {
       // Print SSID, RSSI and encryption for each network found
       String netName = String((WiFi.SSID(i)));
+      String netChn = String((WiFi.channel(i)));
       String netDb = String((WiFi.RSSI(i)));
       String netEnc = String(((WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " " : "*" ));
-      display.drawString(0, l, netName+" "+netDb+ "% "+netEnc );
+      display.drawString(0, l, netName+" ("+netChn+") "+netDb+ "% "+netEnc );
       l = l + 14;
       }
   // write the buffer to the display
